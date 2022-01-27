@@ -2,4 +2,6 @@
 pvm    | aika | tehtävät
 ------ | ---- | :--------
 20.1.|5 h|Aiheen valinta, projektin suunnittelua, Git-repon luominen
-**yht.**|**5 h**
+26.1.|2 h|Projektin ulkoasusuunnittelua paperilla, tutustumista CSS-kieleen
+27.1.|4 h|Etusivun elementtien asettelun pohja tehty HTML- ja CSS-kielillä
+**yht.**|**11 h**
