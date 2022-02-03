@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Nanan Pizza</title>
+		<link rel="stylesheet" href="../static/styles.css">
+	</head>
+	<body>
+		<div class="container">
+			<header><h1>Nanan Pizza</h1></header>
+			<nav>
+			<input type="search" id="site-search" name="q" placeholder="Etsi valikoimasta"><button>Hae</button>
+			<a href="#Pizzat">Pizzat</a>
+			<a href="#Salaatit">Salaatit</a>
+			<a href="#Juomat">Juomat</a>
+			</nav>
+			<main>
+				<h2 id="Pizzat">Pizzat</h2>
+				<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
+				</p>
+				<div class="box">
+					<div><h3>#1 Pizza</h3>
+					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+					<div><h3>#2 Pizza</h3>
+					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+					<div><h3>#3 Pizza</h3>
+					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+					<div><h3>#4 Pizza</h3>
+					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+				</div>
+				<h2 id="Salaatit">Salaatit</h2>
+				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
+				</p>
+				<div class="box">
+					<div>#1 Salaatti</div>
+					<div>#2 Salaatti</div>
+					<div>#3 Salaatti</div>
+					<div>#4 Salaatti</div>
+				</div>
+				<h2 id="Juomat">Juomat</h2>
+				<div class="box">
+					<div>#1 Juoma</div>
+					<div>#2 Juoma</div>
+					<div>#3 Juoma</div>
+					<div>#4 Juoma</div>
+				</div>
+			</main>
+			<aside>
+			{% if session.username %}
+			<h2>Hei, {{ session.username }}!</h2>
+			{% else %}
+			<h2>Kirjaudu sisään tehdäksesi tilaus!</h2>
+			<form action="/login" method="POST">
+			<input type="text" placeholder="Syötä käyttäjätunnus" name="uname" required><br>
+			<input type="password" placeholder="Syötä salasana" name="psw" required><br>
+			<input type="submit" value="Kirjaudu">
+			</form>
+			{% endif %}
+			<button> Luo uusi tunnus</button>
+			</aside>
+			
+		</div>
+	</body>
+</html>

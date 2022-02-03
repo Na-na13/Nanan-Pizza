@@ -1,0 +1,42 @@
+
+.container {
+	display: grid;
+	grid-template-areas:
+		"header header"
+		"nav sidebar"
+		"content sidebar";
+	grid-template-columns: 3fr 1fr;
+	gap: 20px
+}
+
+header {
+	grid-area: header;
+	color: red;
+}
+
+nav {
+	grid-area: nav;
+}
+
+main {
+	grid-area: content;
+}
+
+aside {
+	grid-area: sidebar;
+	border-left: 1px solid;
+}
+
+aside h2 {
+	text-align: center;
+}
+.box > div {
+	box-shadow:10px 10px 10px rgb(230,230,230);
+	padding: 10px;
+	
+}
+.box {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+
