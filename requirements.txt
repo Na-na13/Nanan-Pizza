@@ -9,7 +9,6 @@ blinker==1.4
 certifi==2020.12.5
 chardet==4.0.0
 click==8.0.3
-cloud-init==20.2
 codecov==2.1.11
 colorama==0.4.3
 command-not-found==0.3
