@@ -45,22 +45,8 @@
 					<div>#4 Juoma</div>
 				</div>
 			</main>
-			<aside>
-			<!--<p>{% if session.username %}
-			<h2>Hei, {{ session.username }}!</h2>
-			{% else %}
-			<h2><a href="/login">Kirjaudu sisään</a> tehdäksesi tilaus!</h2>
-			<form action="/login" method="POST">
-			<input type="text" placeholder="Syötä käyttäjätunnus" name="uname" required><br>
-			<input type="password" placeholder="Syötä salasana" name="psw" required><br>
-			<input type="submit" value="Kirjaudu">
-			</form>
-			{% endif %}
-			<button> Luo uusi tunnus</button></p>-->
-			<h2><a href="login">Kirjaudu sisään</a> tehdäksesi tilaus!</h2>
-			<p>Eikö sinulla ole käyttäjätunnusta? <br>
-			<a href="new">Luo uusi käyttäjätunnus!</a>
-			</p>
+			<aside><h2>Hei {{ session.username }}!</h2>
+			<a href="/logout" class="btn btn-success">Kirjaudu ulos</a>
 			</aside>
 			
 		</div>

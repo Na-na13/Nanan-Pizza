@@ -13,32 +13,61 @@ db = SQLAlchemy(app)
 def index():
     return render_template("index.html")
 
-@app.route("/login", methods=["POST"])
-def login():
+@app.route("/submit", methods=["POST"])
+def submit():
     username = request.form["uname"]
     password = request.form["psw"]
-    print(username, password)
     # check if username exists
     sql = "SELECT * FROM users WHERE username=:username"
     query = db.session.execute(sql, {"username":username})
     user = query.fetchone()
     if not user:
-        print("exit 1")
+        print("not existing user")
         return redirect("/")
     else:
+	# check if password is correct
         sql = "SELECT password FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
         passw = result.fetchone()
-        print(passw[0])
         if passw[0] == password:
             session["username"] = username
             print("logged in succesfully")
-            return redirect("/")
+            return redirect("/logged")
         else:
-            print("exit 2")
+            print("password did not match")
             return redirect("/")
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
 
 @app.route("/logged")
 def logged():
-    pass
+    return render_template("logged.html")
+
+@app.route("/new")
+def new():
+    return render_template("new.html")
+
+@app.route("/create", methods=["POST"])
+def create_new_user():
+    # check if username is available
+    username = request.form["uname"]
+    password = request.form["psw"]
+    sql = "SELECT * FROM users WHERE username=:username"
+    query = db.session.execute(sql,{"username":username})
+    user = query.fetchone()
+    if not user:
+        sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
+        db.session.execute(sql,{"username":username, "password":password})
+        db.session.commit()
+        print("new user created")
+        return redirect("/")
+    else:
+        print("username is taken")
+        return render_template("new.html")
+
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
