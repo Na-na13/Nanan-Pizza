@@ -6,4 +6,5 @@ pvm    | aika | tehtävät
 27.1.|4 h|Etusivun elementtien asettelun pohja tehty HTML- ja CSS-kielillä
 2.2.|5 h|PostgreSQL alustus
 3.2.|4 h|Yksinkertainen testisisäänkirjautuminen luotu
-**yht.**|**20 h**
+7.2.|6 h|Uuden käyttäjätunnuksen luominen, sovellus siirretty testattavaksi Herokuun
+**yht.**|**26 h**
