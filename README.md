@@ -4,3 +4,10 @@ Nanan Pizza on netissä toimiva pizzan tilauspalvelu, josta sisäänkirjautunut 
 ## Dokumentit
 [Määrittelydokumentti](https://github.com/Na-na13/Nanan-Pizza/blob/master/dokumentaatiot/maarittelydokumentti.md)  
 [Tuntikirjanpito](https://github.com/Na-na13/Nanan-Pizza/blob/master/dokumentaatiot/tuntikirjanpito.md)
+
+## Testaus  
+Sovellusta pystyy testaamaan [Herokussa](https://nanan-pizza.herokuapp.com/).  
+Tämän hetkiset ominaisuudet:
+- Käyttäjätunnuksen luominen
+- Sisääkirjautuminen olemassa olevalla tunnuksella
+- Uloskirjautuminen
