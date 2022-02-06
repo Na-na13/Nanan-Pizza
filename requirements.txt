@@ -18,7 +18,6 @@ cryptography==2.8
 dbus-python==1.2.16
 distlib==0.3.4
 distro==1.4.0
-distro-info===0.23ubuntu1
 docutils==0.17.1
 entrypoints==0.3
 filelock==3.4.2
