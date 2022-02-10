@@ -7,4 +7,6 @@ pvm    | aika | tehtävät
 2.2.|5 h|PostgreSQL alustus
 3.2.|4 h|Yksinkertainen testisisäänkirjautuminen luotu
 7.2.|6 h|Uuden käyttäjätunnuksen luominen, sovellus siirretty testattavaksi Herokuun
-**yht.**|**26 h**
+9.2.|3 h|Lisätty tuotteiden haku tietokannasta
+10.2.|3 h|Ponnahdusikkuna-tyyppisen valikon testailua
+**yht.**|**32 h**
