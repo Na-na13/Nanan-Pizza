@@ -9,4 +9,5 @@ pvm    | aika | tehtävät
 7.2.|6 h|Uuden käyttäjätunnuksen luominen, sovellus siirretty testattavaksi Herokuun
 9.2.|3 h|Lisätty tuotteiden haku tietokannasta
 10.2.|3 h|Ponnahdusikkuna-tyyppisen valikon testailua
-**yht.**|**32 h**
+16.2.|4 h|Pizzojen lisätäytteiden valinnalle alustettu ponnahdusikkuna-tyyppinen valikko
+**yht.**|**36 h**
