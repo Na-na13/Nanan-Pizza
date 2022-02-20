@@ -13,7 +13,7 @@ CREATE TABLE pizza (
 
 CREATE TABLE extras (
     extra_id SERIAL PRIMARY KEY,
-    name VARCHAR (30) UNIQUE NOT NULL
+    name VARCHAR (30) UNIQUE NOT NULL,
     price NUMERIC (4,2) NOT NULL
 );  
 
