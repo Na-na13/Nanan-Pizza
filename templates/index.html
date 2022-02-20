@@ -19,14 +19,12 @@
 				<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
 				</p>
 				<div class="box">
-					<div><h3>#1 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#2 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#3 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#4 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+					{% for pizza in pizzas %}
+					<div><h3>{{pizza.name}}</h3>
+					<p>{{pizza.ingredients}}<br>
+					<strong>{{pizza.price}}</strong>
+					</p></div>
+					{% endfor %}
 				</div>
 				<h2 id="Salaatit">Salaatit</h2>
 				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.

@@ -9,7 +9,7 @@
 		<div class="container">
 			<header><h1>Nanan Pizza</h1></header>
 			<nav>
-			<input type="search" id="site-search" name="q" placeholder="Etsi valikoimasta"><button>Hae</button>
+			<input type="search" id="site-search" name="search" placeholder="Etsi valikoimasta"><button>Hae</button>
 			<a href="#Pizzat">Pizzat</a>
 			<a href="#Salaatit">Salaatit</a>
 			<a href="#Juomat">Juomat</a>
@@ -19,14 +19,34 @@
 				<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
 				</p>
 				<div class="box">
-					<div><h3>#1 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#2 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#3 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
-					<div><h3>#4 Pizza</h3>
-					<p>Täyte 1, Täyte 2, Täyte 3</p></div>
+					{% for pizza in pizzas %}
+					<div><h3>{{pizza.name}}</h3>
+					<p>{{pizza.ingredients}}<br>
+                                        <strong>{{pizza.price}}</strong><button onclick="document.getElementById('order{{loop.index}}').style.display='block'">+</button>
+					</p></div>
+                                        <div id="order{{loop.index}}" class="order-menu">
+					<form action="/add_to_orderlist" method="POST" class="menu-content animate">
+						<div class="container-option">
+							<h3>{{pizza.name}}</h3>
+							<input type="hidden" name="product" value="{{pizza.name}}">
+							<label><b>Valitse koko</b></label></br>
+							<input type="radio" name="size" value="1" checked> Normaali</br>
+							<input type="radio" name="size" value="2"> Perhe</br>
+							<input type="radio" name="size" value="3"> Pannu</br>
+							<p>
+ 							<label><b>Haluatko lisätäytteitä?</b></label></br>
+                                                        {% for extra in extras%}
+                                                        <input type="checkbox" name="extra" value="{{extra.name}}">{{extra.name}}</br>
+                                                        {% endfor %}
+							<p>
+						</div>
+			  
+						<div class="container-option" style="background-color:#f1f1f1">
+							<button type="submit" onclick="document.getElementById('order{{loop.index}}').style.display='none'">Lisää tilaukseen</button>
+						</div>
+					</form>
+					</div>
+					{% endfor %}
 				</div>
 				<h2 id="Salaatit">Salaatit</h2>
 				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
@@ -44,9 +64,11 @@
 					<div>#3 Juoma</div>
 					<div>#4 Juoma</div>
 				</div>
+
 			</main>
 			<aside><h2>Hei {{ session.username }}!</h2>
-			<a href="/logout" class="btn btn-success">Kirjaudu ulos</a>
+			<a href="/logout">Kirjaudu ulos</a>
+			<a href="/view_orderlist">Tarkastele tilaustasi</a>
 			</aside>
 			
 		</div>

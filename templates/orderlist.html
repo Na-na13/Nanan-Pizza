@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Nanan Pizza</title>
+		<link rel="stylesheet" href="../static/styles.css">
+	</head>
+	<body>
+		<div class="container-option">
+			<h2>Tilauksesi:</h2>
+			{% if orders %}
+			    {% for order in orders %}
+			    <h3>{{order[0]}}</h3>
+			    <h4>lisätäytteet:</h4>
+			    <ul>
+				{% for extra in order[2] %}
+				    <li>{{extra}}</li>
+				{% endfor %}
+			    </ul>
+			    {% endfor %}
+			    <h4>hinta:</h4>
+			    <p>{{price}} €</p>
+			    <form action="/logged">
+			        <input type="submit" value="Jatka tilausta"/>
+			    </form>
+			    <form action="/submit_order">
+			    	<input type="submit" value="Lähetä tilaus"/>
+			    </form>
+			{% else %}
+			<p>Et ole lisännyt tuotteita tilaukseen :(</p>
+			<form action="/logged">
+				<input type="submit" value="Jatka tilausta" />
+			</form>
+			{% endif %}
+		</div>
+	</body>
+</html>
