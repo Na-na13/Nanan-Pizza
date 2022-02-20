@@ -10,4 +10,8 @@ pvm    | aika | tehtävät
 9.2.|3 h|Lisätty tuotteiden haku tietokannasta
 10.2.|3 h|Ponnahdusikkuna-tyyppisen valikon testailua
 16.2.|4 h|Pizzojen lisätäytteiden valinnalle alustettu ponnahdusikkuna-tyyppinen valikko
-**yht.**|**36 h**
+17.2.|2 h|Jokaiseen pizzaan liitetty oma lisätäytevalikko
+18.2.|3 h|Ajax ja jQuery testailua (todettu liian hankalaksi)
+19.2.|4 h|Pizzan lisääminen tilaukseen, tilauksen kokonais hinnan laskeminen ja tilauksen lähettäminen
+20.2.|2 h|Koodin siistimistä ja Herokuun pushaaminen sekä toiminnan testausta
+**yht.**|**47 h**
