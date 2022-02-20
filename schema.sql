@@ -26,8 +26,8 @@ CREATE TABLE orderlist (
 
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY, 
-    user VARCHAR (20), 
-    order TEXT, 
+    username VARCHAR (20), 
+    order_list TEXT, 
     order_time TIMESTAMP NOT NULL
 );
 
