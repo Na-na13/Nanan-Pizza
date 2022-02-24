@@ -10,13 +10,17 @@
 			<h2>Tilauksesi:</h2>
 			{% if orders %}
 			    {% for order in orders %}
-			    <h3>{{order[0]}}</h3>
+			    <form action="/remove_item" method="POST">
+			    <input type="hidden" name="item_id" value="{{order[0]}}">
+			    <h3>{{order[1]}} {{order[0]}}</h3>
 			    <h4>lisätäytteet:</h4>
 			    <ul>
-				{% for extra in order[2] %}
+				{% for extra in order[3] %}
 				    <li>{{extra}}</li>
 				{% endfor %}
 			    </ul>
+			        <input type="submit" value="Poista tuote tilauksesta"/>
+			    </form>
 			    {% endfor %}
 			    <h4>hinta:</h4>
 			    <p>{{price}} €</p>

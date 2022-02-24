@@ -90,20 +90,20 @@ def add_to_orderlist():
 
 @app.route("/view_orderlist")
 def view_orderlist():
-    sql = db.session.execute("SELECT prod, size, extras FROM orderlist")
+    sql = db.session.execute("SELECT order_id, prod, size, extras FROM orderlist")
     orders = sql.fetchall()
     price = 0
     for prod in orders:
         prod_sql = "SELECT price FROM pizza WHERE name=:name"
-        result = db.session.execute(prod_sql,{"name":prod[0]})
+        result = db.session.execute(prod_sql,{"name":prod[1]})
         price += result.fetchone()[0]
-        for extra in prod[2]:
+        for extra in prod[3]:
             xtr_sql = "SELECT price FROM extras WHERE name=:name"
             xtr_result = db.session.execute(xtr_sql,{"name":extra})
             price += xtr_result.fetchone()[0]
-        if prod[1] == 2:
+        if prod[2] == 2:
             price += Decimal(6.5)
-        if prod[1] == 3:
+        if prod[2] == 3:
             price += Decimal(4.5)
     return render_template("orderlist.html", orders=orders, price=price)
 
@@ -126,3 +126,11 @@ def submit_order():
     except Exception:
         print("error occured while submitting the order") # inform user!
         return redirect("/logged")
+
+@app.route("/remove_item", methods=["POST"])
+def remove_item():
+    item_id = request.form["item_id"]
+    sql = "DELETE FROM orderlist WHERE order_id=:id"
+    db.session.execute(sql,{"id":item_id})
+    db.session.commit()
+    return render_template("orderlist.html")
