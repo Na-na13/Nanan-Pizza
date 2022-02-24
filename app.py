@@ -1,4 +1,5 @@
 from datetime import datetime
+from decimal import Decimal
 from flask import Flask
 from flask import redirect, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -95,15 +96,15 @@ def view_orderlist():
     for prod in orders:
         prod_sql = "SELECT price FROM pizza WHERE name=:name"
         result = db.session.execute(prod_sql,{"name":prod[0]})
-        price += float(result.fetchone()[0])
+        price += result.fetchone()[0]
         for extra in prod[2]:
             xtr_sql = "SELECT price FROM extras WHERE name=:name"
             xtr_result = db.session.execute(xtr_sql,{"name":extra})
             price += xtr_result.fetchone()[0]
         if prod[1] == 2:
-            price += 6.5
+            price += Decimal(6.5)
         if prod[1] == 3:
-            price += 4.5
+            price += Decimal(4.5)
     return render_template("orderlist.html", orders=orders, price=price)
 
 @app.route("/submit_order")
