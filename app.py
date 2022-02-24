@@ -103,7 +103,7 @@ def view_orderlist():
         if prod[1] == 2:
             price += 6.5
         if prod[1] == 3:
-            proce += 4.5
+            price += 4.5
     return render_template("orderlist.html", orders=orders, price=price)
 
 @app.route("/submit_order")
