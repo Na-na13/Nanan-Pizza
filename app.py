@@ -95,7 +95,7 @@ def view_orderlist():
     for prod in orders:
         prod_sql = "SELECT price FROM pizza WHERE name=:name"
         result = db.session.execute(prod_sql,{"name":prod[0]})
-        price += result.fetchone()[0]
+        price += float(result.fetchone()[0])
         for extra in prod[2]:
             xtr_sql = "SELECT price FROM extras WHERE name=:name"
             xtr_result = db.session.execute(xtr_sql,{"name":extra})
