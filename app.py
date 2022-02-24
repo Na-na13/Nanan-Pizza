@@ -133,4 +133,4 @@ def remove_item():
     sql = "DELETE FROM orderlist WHERE order_id=:id"
     db.session.execute(sql,{"id":item_id})
     db.session.commit()
-    return render_template("orderlist.html")
+    return view_orderlist()
