@@ -1,13 +1,38 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 
 <html>
 	<head>
 		<title>Nanan Pizza</title>
 		<link rel="stylesheet" href="../static/styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		
 	</head>
 	<body>
-		<div class="container">
-			<header><h1>Nanan Pizza</h1></header>
+			<div class="menubar">
+				<header><h1>Nanan Pizza</h1></header>
+				<div class="left_menu">
+					<a href="/">Etusivu</a>
+					<div class="dropdown">
+						<a href="new">Menu</a>
+						<div class="dropdown-menu">
+							<a href="#Pizzat">Pizzat</a></br>
+							<a href="#Salaatit">Salaatit</a></br>
+							<a href="#Juomat">Juomat</a>
+						</div>
+					</div>
+				</div>
+				<div class="right_menu">
+					<a href="login">Kirjaudu</a>
+					<a href="new">Rekisteröidy</a>
+				</div>
+			</div>-->
+			{% extends "layout.html" %}
+			{% block title %}Etusivu{% endblock %}
+			{% block content %}
+			<div class="imagebox">
+				<img src="../static/img/pizza2.jpg">
+			</div>
+			<div class="container">
 			<nav>
 			<input type="search" id="site-search" name="q" placeholder="Etsi valikoimasta"><button>Hae</button>
 			<a href="#Pizzat">Pizzat</a>
@@ -30,31 +55,24 @@
 				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
 				</p>
 				<div class="box">
-					<div>#1 Salaatti</div>
-					<div>#2 Salaatti</div>
-					<div>#3 Salaatti</div>
-					<div>#4 Salaatti</div>
+					{% for salad in salads %}
+                                        <div><h3>{{salad.name}}</h3>
+                                        <p>{{salad.ingredients}}<br>
+                                        <strong>{{salad.price}}</strong>
+                                        </p></div>
+                                        {% endfor %}
 				</div>
 				<h2 id="Juomat">Juomat</h2>
 				<div class="box">
-					<div>#1 Juoma</div>
-					<div>#2 Juoma</div>
-					<div>#3 Juoma</div>
-					<div>#4 Juoma</div>
+					{% for drink in drinks %}
+                                        <div><h3>{{drink.name}}</h3>
+                                        <p>
+                                        <strong>{{drink.price}}</strong>
+                                        </p></div>
+                                        {% endfor %}
 				</div>
 			</main>
 			<aside>
-			<!--<p>{% if session.username %}
-			<h2>Hei, {{ session.username }}!</h2>
-			{% else %}
-			<h2><a href="/login">Kirjaudu sisään</a> tehdäksesi tilaus!</h2>
-			<form action="/login" method="POST">
-			<input type="text" placeholder="Syötä käyttäjätunnus" name="uname" required><br>
-			<input type="password" placeholder="Syötä salasana" name="psw" required><br>
-			<input type="submit" value="Kirjaudu">
-			</form>
-			{% endif %}
-			<button> Luo uusi tunnus</button></p>-->
 			<h2><a href="login">Kirjaudu sisään</a> tehdäksesi tilaus!</h2>
 			<p>Eikö sinulla ole käyttäjätunnusta? <br>
 			<a href="new">Luo uusi käyttäjätunnus!</a>
@@ -62,5 +80,6 @@
 			</aside>
 			
 		</div>
-	</body>
-</html>
+		{% endblock %}
+	<!--</body>
+</html>-->

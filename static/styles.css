@@ -2,20 +2,200 @@
 .container {
 	display: grid;
 	grid-template-areas:
+		"imagebox imagebox"
+		"nav nav"
+		"content content";
+	grid-template-columns: auto;
+	gap: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.menubar {
+	grid-area: menubar;
+	padding:10px;
+	display: grid;
+	grid-template-areas:
 		"header header"
-		"nav sidebar"
-		"content sidebar";
-	grid-template-columns: 3fr 1fr;
-	gap: 20px
+		"left-menu right-menu";
+	grid-template-columns: 1fr 1fr;
+	position: sticky;
+	top: 0;
+	width: 100%;
+	background-color:white;
+	box-shadow: 0px 7px 3px rgba(220, 220, 220, .2);
+}
+
+.left_menu {
+	padding-left: 50px;
+	
+}
+.left_menu > a {
+	font: small-caps bold 24px/1 sans-serif;
+	font-size: 20px;
+	color: black;
+	text-decoration: None;
+	padding-left: 10px;
+	padding-right: 10px;
+
+}
+
+.right_menu {
+	text-align: right;
+	padding-right: 50px;
+}
+
+.right_menu > a {
+	font: small-caps bold 24px/1 sans-serif;
+	font-size: 20px;
+	color: black;
+	text-decoration: None;
+	padding-left: 10px;
+	padding-right: 10px;
+	
+}
+
+.right_menu a.button {
+	background-color: rgb(100,100,100);
+	border: none;
+	color: white;
+	padding: 4px 25px;
+	font: small-caps 20px/1 sans-serif;
+	text-align: center;
+	text-decoration: none;
+	margin: 4px 2px;
+	cursor: pointer;
+	
+}
+
+.left_menu > a:hover {
+	text-decoration: underline;
+	
+}
+
+.right_menu > a:hover {
+	text-decoration: underline;
+	
+}
+
+.imagebox {
+	grid-area: imagebox;
+	padding: 0;
+    display: block;
+    margin: 0 auto;
+}
+
+img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 90%;
+    max-width: 100%;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	font: small-caps bold 24px/1 sans-serif;
+	font-size: 20px;
+	color: black;
+}
+
+.dropdown > a {
+	text-decoration: None;
+	color: black;
+
+}
+.dropdown > a:hover {
+	text-decoration: underline;
+	color: black;
+
+}
+
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	background-color: white;
+	min-width: 120px;
+	padding: 10px;
+	z-index: 1;
+	text-align:center;
+	
+}
+
+.dropdown:hover {
+	text-decoration: underline;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu > a {
+	font: small-caps 20px/1 sans-serif;
+	color: black;
+	text-decoration: None;
+
+}
+
+.dropdown-menu > a:hover {
+	text-decoration: underline;
+
 }
 
 header {
 	grid-area: header;
-	color: red;
+	text-align: center;
+	font: small-caps bold 30px/1 sans-serif;
+	background: white;
 }
 
 nav {
 	grid-area: nav;
+	font: small-caps bold 24px/1 sans-serif;
+	font-size: 20px;
+	padding:10px;
+	box-shadow: 0px 7px 3px rgba(220, 220, 220, .2);
+	position:sticky;
+	top: 180px;
+	background-color: white;
+	
+}
+
+nav a {
+	font: small-caps 20px/1 sans-serif;
+	color: black;
+	text-decoration: None;
+	padding-right:10px;
+	padding-left: 10px;
+
+}
+
+nav a:hover {
+	text-decoration: underline;
+
+}
+
+nav button {
+	  background-color: rgb(100,100,100);
+	  border: none;
+	  color: white;
+	  padding: 5px 25px;
+	  font: small-caps 20px/1 sans-serif;
+	  text-align: center;
+	  text-decoration: none;
+	  margin: 4px 2px;
+	  cursor: pointer;
+}
+
+nav button:hover {
+	background-color: rgb(150,150,150)
+}
+
+nav input[type=search] {
+  padding: 5px;
+  margin-top: 2px;
+  font-size: 15px;
 }
 
 main {
@@ -30,17 +210,50 @@ aside {
 aside h2 {
 	text-align: center;
 }
-.box > div {
-	box-shadow:10px 10px 10px rgb(230,230,230);
-	padding: 10px;
+
+.category-header {
+	font-family: Helvetica, sans-serif;
+	font-size: 17px;
+	background-color: rgb(230,230,230);
+	padding: 5px 20px;
+}
+
+.category-header h2 {
+	text-align:center;
+	font: small-caps bold 28px/1 sans-serif;
 	
 }
 .box {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 20px;
+	padding-top:10px;
+	padding-left:150px;
+	padding-right:150px;
+	margin-left:10px;
 }
 
+.box-content {
+	font-family: Helvetica, sans-serif;
+	padding: 10px;
+	margin: 20 px;
+	background-color:white;
+	box-shadow: 0px 7px 3px rgba(210, 210, 210, .2);
+	
+}
+
+.box-content button {
+	background-color: rgb(100,100,100);
+	border: none;
+	color: white;
+	padding: 4px 8px;
+	font: small-caps 20px/1 sans-serif;
+	text-align: center;
+	text-decoration: none;
+	margin: 4px 2px;
+	cursor: pointer;
+
+}
 .container-option {
 	padding: 16px;
 }
@@ -66,6 +279,11 @@ aside h2 {
 	width: 40%;
 }
 
+h3 {
+	font: small-caps bold 24px/1 sans-serif;
+	font-size: 20px;
+
+}
 
 .animate {
 	-webkit-animation: animatezoom 0.3s;
