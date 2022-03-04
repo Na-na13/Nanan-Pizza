@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="/static/styles.css">
+		<title>Nanan Pizza - {% block title %}{% endblock %}</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div class="menubar">
+			<header><h1>Nanan Pizza</h1></header>
+			<div class="left_menu">
+				{% if session.user_id %}
+				<a href="/logged">Etusivu</a>
+				{% else %}
+				<a href="/">Etusivu</a>
+				{% endif %}
+				<div class="dropdown">
+					<a href="new">Menu</a>
+					<div class="dropdown-menu">
+						<a href="#Pizzat">Pizzat</a></br>
+						<a href="#Salaatit">Salaatit</a></br>
+						<a href="#Juomat">Juomat</a>
+					</div>
+				</div>
+			</div>
+			<div class="right_menu">
+				{% if session.user_id %}
+				<div class="dropdown">
+					<a href="">{{session.username}}</a>
+					<div class="dropdown-menu">
+						<a href="/logout">Kirjaudu ulos</a>
+					</div>
+				</div>
+				<a href="/view_orderlist" class="button">Tilaa</a>
+				{% else %}
+				<a href="/login">Kirjaudu</a>
+				<a href="/new">Rekisteröidy</a>
+				{% endif %}
+			</div>
+		</div>
+		{% block content %}{% endblock %}
+	</body>
+</html>
