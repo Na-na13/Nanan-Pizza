@@ -11,7 +11,8 @@ Tämän hetkiset ominaisuudet:
 - Käyttäjätunnuksen luominen
 - Sisääkirjautuminen olemassa olevalla tunnuksella
 - Uloskirjautuminen
-- Pizzan koon lisätäytteiden valinta
+- Pizzan koon ja lisätäytteiden valinta
 - Pizzan lisääminen tilaukseen
+- Pizza poistaminen tilauksesta
 - Kokonaishinnan laskeminen tilaukselle
 - Tilauksen lähettäminen

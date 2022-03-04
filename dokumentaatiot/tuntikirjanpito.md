@@ -14,4 +14,5 @@ pvm    | aika | tehtävät
 18.2.|3 h|Ajax ja jQuery testailua (todettu liian hankalaksi)
 19.2.|4 h|Pizzan lisääminen tilaukseen, tilauksen kokonais hinnan laskeminen ja tilauksen lähettäminen
 20.2.|2 h|Koodin siistimistä ja Herokuun pushaaminen sekä toiminnan testausta
-**yht.**|**47 h**
+24.2.|3 h|Virheiden korjaamista ja toiminto tuotteen poistamiselle tilauslistalta lisätty 
+**yht.**|**50 h**
