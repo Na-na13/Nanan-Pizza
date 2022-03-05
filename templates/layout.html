@@ -14,19 +14,11 @@
 				{% else %}
 				<a href="/">Etusivu</a>
 				{% endif %}
-				<div class="dropdown">
-					<a href="new">Menu</a>
-					<div class="dropdown-menu">
-						<a href="#Pizzat">Pizzat</a></br>
-						<a href="#Salaatit">Salaatit</a></br>
-						<a href="#Juomat">Juomat</a>
-					</div>
-				</div>
 			</div>
 			<div class="right_menu">
 				{% if session.user_id %}
 				<div class="dropdown">
-					<a href="">{{session.username}}</a>
+					<a href="">{{session.user_name}}</a>
 					<div class="dropdown-menu">
 						<a href="/logout">Kirjaudu ulos</a>
 					</div>
@@ -34,7 +26,7 @@
 				<a href="/view_orderlist" class="button">Tilaa</a>
 				{% else %}
 				<a href="/login">Kirjaudu</a>
-				<a href="/new">Rekisteröidy</a>
+				<a href="/create">Rekisteröidy</a>
 				{% endif %}
 			</div>
 		</div>
