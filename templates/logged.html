@@ -1,123 +1,129 @@
-<!--<!DOCTYPE html>
-
-<html>
-	<head>
-		<title>Nanan Pizza</title>
-		<link rel="stylesheet" href="../static/styles.css">
-	</head>
-	<body>-->
-				{% extends "layout.html" %}
-			{% block title %}Etusivu{% endblock %}
-			{% block content %}
-			<div class="imagebox">
-				<img src="../static/img/pizza2.jpg">
-			</div>
-		<div class="container">
-			<nav>
-			<input type="search" id="site-search" name="search" placeholder="Etsi valikoimasta">
-			<button>Hae</button>
-			<a href="#Pizzat">Pizzat</a>
-			<a href="#Salaatit">Salaatit</a>
-			<a href="#Juomat">Juomat</a>
-			</nav>
-			<main>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+	<div class="imagebox">
+		<img src="../static/img/pizza2.jpg">
+	</div>
+	<div class="container">
+		<nav>
+			<form action="/search" method="GET">
+				<input type="search" name="query" placeholder="Etsi valikoimasta">
+				<button type="submit" value="submit">Hae</button>
+				<a href="#Pizzat">Pizzat</a>
+				<a href="#Salaatit">Salaatit</a>
+				<a href="#Juomat">Juomat</a>
+			</form>
+		</nav>
+		<main>
+			{% if result %}
 				<div class="category-header">
-					<h2 id="Pizzat">Pizzat</h2>
-					<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
-					</p>
+					<h2>Hakutulokset</h2>
 				</div>
 				<div class="box">
-					{% for pizza in pizzas %}
-					<div class="box-content">
-						<h3>{{pizza.name}}</h3>
-						<p>
-							{% for inc in pizza.ingredients %}
-								{{ inc }},
-							{% endfor%}
-							<br>
-                            <strong>{{pizza.price}} €</strong>
-							<button onclick="document.getElementById('pizza{{loop.index}}').style.display='block'">+</button></right>
-						</p>
-					</div>
-                    <div id="pizza{{loop.index}}" class="order-menu">
-					<form action="/add_to_orderlist" method="POST" class="menu-content animate">
-						<div class="container-option">
-							<h3>{{pizza.name}}</h3>
-							<input type="hidden" name="product" value="{{pizza.id}}">
-							<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-							<label><b>Valitse koko</b></label></br>
-							<input type="radio" name="size" value="1" checked> Normaali</br>
-							<input type="radio" name="size" value="2"> Perhe</br>
-							<input type="radio" name="size" value="3"> Pannu</br>
-							<p>
- 							<label><b>Haluatko lisätäytteitä?</b></label></br>
-                                                        {% for extra in extras%}
-                                                        <p style="text-align:left;"><input type="checkbox" name="extra" value="{{extra.name}}">{{extra.name}}<span style="float:right;">+{{extra.price}}€</span></p>
-                                                        {% endfor %}
-							<p>
+					{% for product in result %}
+						<div class="box-content">
+							<h3>{{product.name}}</h3>
+							<p>	
+								{% for inc in product.ingredients %}
+									{{inc}}
+								{% endfor%}
+								<br>
+								<strong>{{product.price}}</strong>
+							</p>
 						</div>
-			  
-						<div class="container-option" style="background-color:#f1f1f1">
-							<button type="submit" onclick="document.getElementById('pizza{{loop.index}}').style.display='none'">Lisää tilaukseen</button>
-						</div>
-					</form>
-					</div>
 					{% endfor %}
 				</div>
-				<div class="category-header">
-					<h2 id="Salaatit">Salaatit</h2>
-					<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
+			{% endif %}
+			<div class="category-header">
+				<h2 id="Pizzat">Pizzat</h2>
+				<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
+				</p>
+			</div>
+			<div class="box">
+				{% for pizza in pizzas %}
+				<div class="box-content">
+					<h3>{{pizza.name}}</h3>
+					<p>
+						{% for inc in pizza.ingredients %}
+							{{ inc }},
+						{% endfor%}
+						<br>
+						<strong>{{pizza.price}} €</strong>
+						<button onclick="document.getElementById('pizza{{loop.index}}').style.display='block'">+</button>
 					</p>
 				</div>
-				<div class="box">
-					{% for salad in salads %}
-                        <div class="box-content">
-							<form action="/add_to_orderlist" method="POST">
-								<input type="hidden" name="product" value="{{salad.id}}">
-								<input type="hidden" name="size" value="1">
-								<input type="hidden" name="extra" value="None">
-								<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-								<h3>{{salad.name}}</h3>
-                                <p>
-									{% for inc in salad.ingredients %}
-										{{ inc }},
-									{% endfor%}
-									<br>
-									<strong>{{salad.price}}</strong>
-									<button type="submit">+</button>
-                                </p>
-                            </form>
-                        </div>
-                    {% endfor %}
+				<div id="pizza{{loop.index}}" class="order-menu">
+				<form action="/add_to_orderlist" method="POST" class="menu-content animate">
+					<div class="container-option">
+						<h3>{{pizza.name}}</h3>
+						<input type="hidden" name="product" value="{{pizza.id}}">
+						<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+						<label><b>Valitse koko</b></label></br>
+						<input type="radio" name="size" value="1" checked> Normaali</br>
+						<input type="radio" name="size" value="2"> Perhe</br>
+						<input type="radio" name="size" value="3"> Pannu</br>
+						<p>
+						<label><b>Haluatko lisätäytteitä?</b></label></br>
+													{% for extra in extras%}
+													<p style="text-align:left;"><input type="checkbox" name="extra" value="{{extra.name}}">{{extra.name}}<span style="float:right;">+{{extra.price}}€</span></p>
+													{% endfor %}
+						<p>
+					</div>
+		  
+					<div class="container-option" style="background-color:#f1f1f1">
+						<button type="submit" onclick="document.getElementById('pizza{{loop.index}}').style.display='none'">Lisää tilaukseen</button>
+					</div>
+				</form>
 				</div>
-				<div class="category-header">
+				{% endfor %}
+			</div>
+			<div class="category-header">
+				<h2 id="Salaatit">Salaatit</h2>
+				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
+				</p>
+			</div>
+			<div class="box">
+				{% for salad in salads %}
+					<div class="box-content">
+						<form action="/add_to_orderlist" method="POST">
+							<input type="hidden" name="product" value="{{salad.id}}">
+							<input type="hidden" name="size" value="1">
+							<input type="hidden" name="extra" value="None">
+							<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+							<h3>{{salad.name}}</h3>
+							<p>
+								{% for inc in salad.ingredients %}
+									{{ inc }},
+								{% endfor%}
+								<br>
+								<strong>{{salad.price}}</strong>
+								<button type="submit">+</button>
+							</p>
+						</form>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="category-header">
 				<h2 id="Juomat">Juomat</h2>
-				</div>
-				<div class="box">
-                    {% for drink in drinks %}
-                        <div class="box-content">
-                            <form action="/add_item" method="POST">
-                                <input type="hidden" name="product" value="{{drink.id}}">
-                                <input type="hidden" name="size" value="1">
-                                <input type="hidden" name="extra" value="None">
-								<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-                                <h3>{{drink.name}}</h3>
-                                <p>
-									<strong>{{drink.price}}</strong>
-									<button type="submit">+</button>
-                                </p>
-                            </form>
-                        </div>
-                    {% endfor %}
-                </div>
+			</div>
+			<div class="box">
+				{% for drink in drinks %}
+					<div class="box-content">
+						<form action="/add_item" method="POST">
+							<input type="hidden" name="product" value="{{drink.id}}">
+							<input type="hidden" name="size" value="1">
+							<input type="hidden" name="extra" value="None">
+							<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+							<h3>{{drink.name}}</h3>
+							<p>
+								<strong>{{drink.price}}</strong>
+								<button type="submit">+</button>
+							</p>
+						</form>
+					</div>
+				{% endfor %}
+			</div>
 
-			</main>
-			<!--<aside><h2>Hei {{ session.username }}!</h2>
-			<a href="/logout">Kirjaudu ulos</a>
-			<a href="/view_orderlist">Tarkastele tilaustasi</a>
-			</aside>-->
-			
-		</div>
-		{% endblock %}
-	<!--</body>
-</html>-->
+		</main>
+	</div>
+{% endblock %}

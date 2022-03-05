@@ -1,92 +1,62 @@
 from app import app
-from db import db
-#from datetime import datetime
-#from flask import Flask
 from flask import redirect, render_template, request, session
-#from flask_sqlalchemy import SQLAlchemy
-#from os import getenv
-#from werkzeug.security import check_password_hash, generate_password_hash
 
-import user
 import order
-
-#app = Flask(__name__)
-#app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
-#app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-#app.secret_key = getenv("SECRET_KEY")
-#db = SQLAlchemy(app)
+import product
+import user
 
 @app.route("/")
 def index():
-    sql = db.session.execute("SELECT name, price, ingredients FROM products WHERE category ='pizza'")
-    pizzas = sql.fetchall()
-    sql = db.session.execute("SELECT name, price, ingredients FROM products WHERE category ='salad'")
-    salads = sql.fetchall()
-    sql = db.session.execute("SELECT name, price, ingredients FROM products WHERE category ='drink'")
-    drinks = sql.fetchall()
-    return render_template("index.html", pizzas=pizzas, salads=salads, drinks=drinks)
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    username = request.form["username"]
-    password = request.form["password"]
-    if user.login(username, password):
-        return redirect("/logged")
-    else:
-        pass
-        print("käyttäjätunnus tai salasana ei täsmää -> luo uusi käyttäjä?")
-    return redirect("/")
+    products = product.get_all()
+    return render_template("index.html", pizzas=products[0], salads=products[1], drinks=products[2])
 
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "GET":
         return render_template("login.html")
-
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-
-        if not users.login(username, password):
+        if not user.login(username, password):
             return redirect("/")
         return redirect("/logged")
-#    return render_template("login.html")
 
 @app.route("/logged")
 def logged():
-    sql = db.session.execute("SELECT prod_id AS id, name, price, ingredients FROM products WHERE category ='pizza' ORDER BY prod_id")
-    pizzas = sql.fetchall()
-    sql = db.session.execute("SELECT prod_id AS id, name, price, ingredients FROM products WHERE category ='salad' ORDER BY prod_id")
-    salads = sql.fetchall()
-    sql = db.session.execute("SELECT prod_id AS id, name, price, ingredients FROM products WHERE category ='drink' ORDER BY prod_id")
-    drinks = sql.fetchall()
-    sql = db.session.execute("SELECT extra_id AS id, name, price FROM extras ORDER BY name, price")
-    extras = sql.fetchall()
-    return render_template("logged.html", pizzas=pizzas, salads=salads, drinks=drinks, extras=extras)
-
-@app.route("/new")
-def new():
-    return render_template("new.html")
-
-@app.route("/create", methods=["POST"])
-def create_new_user():
-    username = request.form["username"]
-    password = request.form["password"]
-    if user.create_new(username, password):
-        return redirect("/")
-    else:
-        pass
-        # käyttäjätunnus on varattu!
+    products = product.get_all()
+    return render_template("logged.html", pizzas=products[0], salads=products[1], drinks=products[2], extras=products[3])
 
 @app.route("/logout")
 def logout():
     user.logout()
     return redirect("/")
 
+@app.route("/create", methods=["GET","POST"])
+def create_new_user():
+    if request.method == "GET":
+        return render_template("new.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if user.create_new(username, password):
+            return redirect("/")
+        else:
+            pass
+            # käyttäjätunnus on varattu!
+    
+@app.route("/search")
+def search():
+    key = request.args["query"]
+    result = product.search(key)
+    products = product.get_all()
+    if not session.get("user_id"):
+         return render_template("index.html", result=result, pizzas=products[0], salads=products[1], drinks=products[2])
+    return render_template("logged.html", result=result, pizzas=products[0], salads=products[1], drinks=products[2])  
+
 @app.route("/add_to_orderlist", methods=["POST"])
 def add_to_orderlist():
     user.check_csrf()
     prod = request.form["product"]
-    print("tuote:",prod)
     size = request.form["size"]
     extras = request.form.getlist("extra")
     if order.add_product(prod, size, extras):

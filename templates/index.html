@@ -1,85 +1,90 @@
-<!--<!DOCTYPE html>
-
-<html>
-	<head>
-		<title>Nanan Pizza</title>
-		<link rel="stylesheet" href="../static/styles.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		
-	</head>
-	<body>
-			<div class="menubar">
-				<header><h1>Nanan Pizza</h1></header>
-				<div class="left_menu">
-					<a href="/">Etusivu</a>
-					<div class="dropdown">
-						<a href="new">Menu</a>
-						<div class="dropdown-menu">
-							<a href="#Pizzat">Pizzat</a></br>
-							<a href="#Salaatit">Salaatit</a></br>
-							<a href="#Juomat">Juomat</a>
-						</div>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+	<div class="imagebox">
+		<img src="../static/img/pizza2.jpg">
+	</div>
+	<div class="container">
+		<nav>
+			<form action="/search" method="GET">
+				<input type="search" name="query" placeholder="Etsi valikoimasta">
+				<button type="submit" value="submit">Hae</button>
+				<a href="#Pizzat">Pizzat</a>
+				<a href="#Salaatit">Salaatit</a>
+				<a href="#Juomat">Juomat</a>
+			</form>
+		</nav>
+		<main>
+			{% if result %}
+				<div class="category-header">
+				<h2>Hakutulokset</h2>
+				</div>
+				<div class="box">
+				{% for product in result %}
+					<div class="box-content">
+						<h3>{{product.name}}</h3>
+						<p>	
+							{% for inc in product.ingredients %}
+								{{inc}}
+							{% endfor%}
+							<br>
+							<strong>{{product.price}}</strong>
+						</p>
 					</div>
+				{% endfor %}
 				</div>
-				<div class="right_menu">
-					<a href="login">Kirjaudu</a>
-					<a href="new">Rekisteröidy</a>
-				</div>
-			</div>-->
-			{% extends "layout.html" %}
-			{% block title %}Etusivu{% endblock %}
-			{% block content %}
-			<div class="imagebox">
-				<img src="../static/img/pizza2.jpg">
-			</div>
-			<div class="container">
-			<nav>
-			<input type="search" id="site-search" name="q" placeholder="Etsi valikoimasta"><button>Hae</button>
-			<a href="#Pizzat">Pizzat</a>
-			<a href="#Salaatit">Salaatit</a>
-			<a href="#Juomat">Juomat</a>
-			</nav>
-			<main>
+			{% endif %}
+			<div class="category-header">
 				<h2 id="Pizzat">Pizzat</h2>
 				<p>Pizzat on valmistettu laadukkaita italialaisia raaka-aineita käyttäen. Jokainen pizza sisältää tomaattikastikkeen ja mozzarellajuustoa.
 				</p>
-				<div class="box">
-					{% for pizza in pizzas %}
-					<div><h3>{{pizza.name}}</h3>
-					<p>{{pizza.ingredients}}<br>
-					<strong>{{pizza.price}}</strong>
-					</p></div>
-					{% endfor %}
-				</div>
+			</div>
+			<div class="box">
+				{% for pizza in pizzas %}
+					<div class="box-content">
+						<h3>{{pizza.name}}</h3>
+						<p>	
+							{% for inc in pizza.ingredients %}
+								{{inc}}
+							{% endfor%}
+							<br>
+							<strong>{{pizza.price}}</strong>
+						</p>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="category-header">
 				<h2 id="Salaatit">Salaatit</h2>
 				<p>Salaatit on valmistettu tuoreista ja laadukkaista raaka-aineista.
 				</p>
-				<div class="box">
-					{% for salad in salads %}
-                                        <div><h3>{{salad.name}}</h3>
-                                        <p>{{salad.ingredients}}<br>
-                                        <strong>{{salad.price}}</strong>
-                                        </p></div>
-                                        {% endfor %}
+			</div>
+			<div class="box">
+				{% for salad in salads %}
+				<div class="box-content">
+					<h3>{{salad.name}}</h3>
+					<p>
+						{% for inc in salad.ingredients %}
+							{{ inc }},
+						{% endfor%}
+						<br>
+						<strong>{{salad.price}}</strong>
+					</p>
 				</div>
-				<h2 id="Juomat">Juomat</h2>
-				<div class="box">
-					{% for drink in drinks %}
-                                        <div><h3>{{drink.name}}</h3>
-                                        <p>
-                                        <strong>{{drink.price}}</strong>
-                                        </p></div>
-                                        {% endfor %}
+				{% endfor %}
+			</div>
+			<div class="category-header">
+			<h2 id="Juomat">Juomat</h2>
+			</div>
+			<div class="box">
+				{% for drink in drinks %}
+				<div class="box-content">
+					<h3>{{drink.name}}</h3>
+					<p>
+						<strong>{{drink.price}}</strong>
+					</p>
 				</div>
-			</main>
-			<aside>
-			<h2><a href="login">Kirjaudu sisään</a> tehdäksesi tilaus!</h2>
-			<p>Eikö sinulla ole käyttäjätunnusta? <br>
-			<a href="new">Luo uusi käyttäjätunnus!</a>
-			</p>
-			</aside>
-			
-		</div>
-		{% endblock %}
-	<!--</body>
-</html>-->
+				{% endfor %}
+			</div>
+		</main>
+	</div>
+{% endblock %}
