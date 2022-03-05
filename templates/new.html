@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-
-<html>
-	<head>
-		<title>Nanan Pizza login</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="styles.css">
-	</head>
-	<body>
-		<h1>Luo uusi käyttäjätunnus</h1>
-		<form action="/create" method="POST">
-		<label for="username">Uusi käyttäjätunnus: </label>
-        	<input type="text" placeholder="Syötä käyttäjätunnus" id="username" name="username" maxlength="10" required><br>
-		<label for="password">Salasana: </label>
-        	<input type="password" placeholder="Syötä salasana" id="password" name="password" maxlength="15" required><br>
-        	<button type="submit" value="submit">Luo tunnus</button>
-        	</form>
-	</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Kirjaudu{% endblock %}
+{% block content %}
+	<h1>Luo uusi käyttäjätunnus</h1>
+	<form action="/create" method="POST">
+	<label for="username">Uusi käyttäjätunnus: </label>
+		<input type="text" placeholder="Syötä käyttäjätunnus" id="username" name="username" maxlength="10" required><br>
+	<label for="password">Salasana: </label>
+		<input type="password" placeholder="Syötä salasana" id="password" name="password" maxlength="15" required><br>
+		<button type="submit" value="submit">Luo tunnus</button>
+		</form>
+{% endblock %}
