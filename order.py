@@ -27,8 +27,9 @@ def get_price(product_id, size, extras):
     for extra in extras:
         xtr_sql = "SELECT price FROM extras WHERE name=:name"
         xtr_query = db.session.execute(xtr_sql,{"name":extra})
-        if xtr_query.fetchone():
-            price += xtr_query.fetchone()[0]
+        result = xtr_query.fetchone()
+        if result:
+            price += result[0]
     return price
     
 def view_all():
