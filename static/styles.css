@@ -18,7 +18,8 @@
 		"header header"
 		"left-menu right-menu";
 	grid-template-columns: 1fr 1fr;
-	position: sticky;
+	position: fixed;
+	z-index:1;
 	top: 0;
 	width: 100%;
 	background-color:white;
@@ -47,7 +48,8 @@
 a.button,
 nav button,
 .login-box > form > button,
-.new-user-box > form > button {
+.new-user-box > form > button,
+.order-box button {
 	background-color: rgb(100,100,100);
 	border: none;
 	color: white;
@@ -64,12 +66,13 @@ nav button:hover,
 .pizza-option button:hover,
 .close-menu:hover,
 .login-box > form > button:hover,
-.new-user-box > form > button:hover {
+.new-user-box > form > button:hover,
+.order-box button:hover {
 	background-color: rgb(150,150,150)
 }	
 
 .left_menu > a:hover,
-.right-menu > a:hover,
+.right_menu > a:hover,
 .user-name:hover,
 .dropdown-menu > a:hover,
 .dropdown:hover,
@@ -169,8 +172,8 @@ main {
 .category-header h2 {
 	text-align:center;
 	font: small-caps bold 28px/1 sans-serif;
-	
 }
+
 .box {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -219,7 +222,7 @@ main {
 
 .menu-content {
 	background-color: rgb(255, 255, 255);
-	margin: 5% auto 15% auto;
+	margin: 1% auto 15% auto;
 	width: 30%;
 	position:relative;
 }
@@ -254,17 +257,19 @@ main {
 }
 
 h3 {
-	font: small-caps bold 24px/1 sans-serif;
-	font-size: 20px;
+	font: small-caps bold 20px/1 sans-serif;
 }
 
 .login-box,
-.new-user-box {
+.new-user-box,
+.order-box {
 	font-family: Helvetica, sans-serif;
 	font-size: 17px;
 	margin: 5% auto 15% auto;
 	width: 30%;
 	position:relative;
+	top: 170px;
+	/*z-index:-1;*/
 }
 
 .login-box > form {
@@ -288,8 +293,11 @@ h3 {
 	grid-column-start: 2;
 }
 
-.login-box > p{
-	grid-column: 1 / span 2;
+.login-box > p,
+.new-user-box > p {
+	padding: 5px;
+	text-align: center;
+	background: blanchedalmond;
 }		
 
 .login-box > form label, input,
@@ -306,6 +314,49 @@ h3 {
 .new-user-box > form > button {
 	grid-row: 7;
 	grid-column-start: 2;
+}
+
+.order-box-content > form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 10px;
+}
+
+.order-box-content  h3,
+.order-box-content p,
+.order-box-content ul {
+	grid-column-start: 1;
+}
+
+.order-box-content  label,
+.order-box-content button {
+	grid-column-start: 2;
+	justify-self: center;
+	align-self: center;
+}
+
+.order-box-content > form h3, label {
+    margin: auto 0;
+}
+
+.order-box h2 {
+	font: small-caps bold 28px/1 sans-serif;
+}
+
+.order-box h3 {
+	font: small-caps bold 20px/1 sans-serif;
+}	
+
+ul {
+	list-style: none;
+	padding:0px;
+	font-size: 15px;
+	color: grey;
+}
+
+li:before {
+    content: "+";
+    margin-right: 2px;
 }
 
 .animate {

@@ -1,41 +1,41 @@
 {% extends "layout.html" %}
-{% block title %}Etusivu{% endblock %}
+{% block title %}Tilauslista{% endblock %}
 {% block content %}
-	<div class="container-option">
+	<div class="order-box">
 		<h2>Tilauksesi:</h2>
 		{% if orders %}
 			{% for order in orders %}
+			<div class="order-box-content">
 				<form action="/remove_item" method="POST">
 					<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 					<input type="hidden" name="order_id" value="{{order.id}}">
 					<h3>{{order.name}}</h3>
-					<h4>koko:</h4>
+					<label>{{order.price}} €</label>
 					<p>{{order.size}}</p>
 					{% if order.extras %}
-						<h4>lisätäytteet:</h4>
 						<ul>
 						{% for extra in order.extras %}
 							<li>{{extra}}</li>
 						{% endfor %}
 						</ul>
 					{% endif %}
-					<h4>hinta:</h4>
-					<p>{{order.price}}</p>
-					<input type="submit" value="Poista tuote tilauksesta"/>
+					<button type="submit" value="submit">Poista</button>
 				</form>
+			</div>
 			{% endfor %}
-			<h4>Loppusumma:</h4>
+			<hr>
+			<h3>Loppusumma:</h3>
 			<p>{{price}} €</p>
 			<form action="/logged">
-				<input type="submit" value="Jatka tilausta"/>
+				<button type="submit" value="submit">Jatka tilausta</button>
 			</form>
 			<form action="/submit_order">
-				<input type="submit" value="Lähetä tilaus"/>
+				<button type="submit" value="submit">Lähetä tilaus</button>
 			</form>
 		{% else %}
 		<p>Et ole lisännyt tuotteita tilaukseen :(</p>
 		<form action="/logged">
-			<input type="submit" value="Jatka tilausta" />
+			<button type="submit" value="submit">Jatka tilausta</button>
 		</form>
 		{% endif %}
 	</div>
