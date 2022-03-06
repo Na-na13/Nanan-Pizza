@@ -47,30 +47,36 @@
 						{% for inc in pizza.ingredients %}
 							{{ inc }},
 						{% endfor%}
-						<br>
+						</br>
 						<strong>{{pizza.price}} €</strong>
 						<button onclick="document.getElementById('pizza{{loop.index}}').style.display='block'">+</button>
 					</p>
 				</div>
 				<div id="pizza{{loop.index}}" class="order-menu">
 				<form action="/add_to_orderlist" method="POST" class="menu-content animate">
-					<div class="container-option">
+					<div class="pizza-option">
 						<h3>{{pizza.name}}</h3>
+						<span class="close-menu" onclick="document.getElementById('pizza{{loop.index}}').style.display='none'">X</span>
 						<input type="hidden" name="product" value="{{pizza.id}}">
 						<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-						<label><b>Valitse koko</b></label></br>
+						<label><b>Valitse koko</b></label>
+						</br>
+						</br>
 						<input type="radio" name="size" value="1" checked> Normaali</br>
 						<input type="radio" name="size" value="2"> Perhe</br>
 						<input type="radio" name="size" value="3"> Pannu</br>
-						<p>
+						</br>
+						<hr>
+						</br>
 						<label><b>Haluatko lisätäytteitä?</b></label></br>
-													{% for extra in extras%}
-													<p style="text-align:left;"><input type="checkbox" name="extra" value="{{extra.name}}">{{extra.name}}<span style="float:right;">+{{extra.price}}€</span></p>
-													{% endfor %}
-						<p>
-					</div>
-		  
-					<div class="container-option" style="background-color:#f1f1f1">
+						{% for extra in extras%}
+							<p style="text-align:left;">
+								<input type="checkbox" name="extra" value="{{extra.name}}">{{extra.name}}<span style="float:right;">+{{extra.price}}€</span>
+							</p>
+						{% endfor %}
+						</br>
+						<hr>
+						</br>
 						<button type="submit" onclick="document.getElementById('pizza{{loop.index}}').style.display='none'">Lisää tilaukseen</button>
 					</div>
 				</form>
