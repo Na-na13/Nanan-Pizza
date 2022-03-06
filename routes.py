@@ -18,7 +18,8 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if not user.login(username, password):
-            return redirect("/")
+            message = "Ongelmia kirjautumisessa, yritä uudelleen!"
+            return render_template("login.html", message=message)
         return redirect("/logged")
 
 @app.route("/logged")
@@ -42,8 +43,8 @@ def create_new_user():
         if user.create_new(username, password, password2):
             return redirect("/logged")
         else:
-            pass
-            # käyttäjätunnus on varattu!
+            message = "Ongelmia tunnuksen luomisessa, yritä uudelleen!"
+            return render_template("new.html", message=message)
     
 @app.route("/search")
 def search():
@@ -54,6 +55,13 @@ def search():
          return render_template("index.html", result=result, pizzas=products[0], salads=products[1], drinks=products[2])
     return render_template("logged.html", result=result, pizzas=products[0], salads=products[1], drinks=products[2])  
 
+@app.route("/view_orderlist")
+def view_orderlist():
+    orderlist = order.view_all()
+    orders = orderlist[0]
+    total_price = orderlist[1]
+    return render_template("orderlist.html", orders=orders, price=total_price)
+    
 @app.route("/add_to_orderlist", methods=["POST"])
 def add_to_orderlist():
     user.check_csrf()
@@ -62,21 +70,19 @@ def add_to_orderlist():
     extras = request.form.getlist("extra")
     if order.add_product(prod, size, extras):
         return logged()
-        # Tuote lisätty tilaukseen onnistuneesti
-    else:
-        pass
-        # Tuotteen lisäämisessä tilaukseen ilmeni virhe, yritä uudestaan!
+    return render_template("error.html")
 
-@app.route("/view_orderlist")
-def view_orderlist():
-    orderlist = order.view_all()
-    orders = orderlist[0]
-    total_price = orderlist[1]
-    return render_template("orderlist.html", orders=orders, price=total_price)
+@app.route("/remove_item", methods=["POST"])
+def remove_item():
+    user.check_csrf()
+    order_id = request.form["order_id"]
+    if order.remove_product(order_id):
+        return view_orderlist()
+    return render_template("error.html")
 
 @app.route("/submit_order")
 def submit_order():
-    pass
+    return render_template("error.html")
     #user = session["username"]
     #order_sql = db.session.execute("SELECT prod, size, extras FROM orderlist")
     #final_order = [(row[0],row[1],row[2]) for row in order_sql.fetchall()]
@@ -94,10 +100,3 @@ def submit_order():
     #except Exception:
     #    print("error occured while submitting the order") # inform user!
     #    return redirect("/logged")
-
-@app.route("/remove_item", methods=["POST"])
-def remove_item():
-    user.check_csrf()
-    order_id = request.form["order_id"]
-    order.remove_product(order_id)
-    return view_orderlist()

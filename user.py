@@ -31,8 +31,6 @@ def create_new(username, password, password2):
         db.session.commit()
         return login(username, password)
     except Exception as e:
-        print(e)
-        print("username is taken") # show error message to user!
         return False
     
 def check_csrf():
