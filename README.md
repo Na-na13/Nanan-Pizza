@@ -9,7 +9,7 @@ Nanan Pizza on pizzan tilauspalvelu, josta sisäänkirjautunut käyttäjä pysty
 Sovellusta pystyy testaamaan [Herokussa](https://nanan-pizza.herokuapp.com/). Testausta varten sovellukseen on valmiiksi luotu testikäyttäjä, jonka tunnus on *test_user* ja salasana *123*.  
 Sovelluksen päätoiminnallisuudet:
 - Kirjautumattomana käyttäjänä voi
-  - selata vaikoimaa
+  - selata valikoimaa
   - hakea valikoimasta hakusanalla tuotteita
   - luoda uuden käyttäjätunnuksen
 - Kirjautuneena käyttäjänä voi
