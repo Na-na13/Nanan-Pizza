@@ -2,7 +2,6 @@ from db import db
 from flask import session
 
 def add_product(product, size, extras):
-    print("lisää", product)
     price = get_price(product, size, extras)
     try:
         sql = "INSERT INTO orderlist (user_id, product_id, size, extras, price, visible) VALUES (:id, :product, :size, :extras, :price, :visible)"
@@ -22,14 +21,14 @@ def remove_product(product):
         return False
         
 def get_price(product_id, size, extras):
-    print("id:", product_id)
     sql = "SELECT SUM(price) FROM (SELECT price FROM products WHERE prod_id=:product_id UNION ALL SELECT price FROM sizes WHERE size_id=:size) AS total"
     query = db.session.execute(sql, {"product_id":product_id, "size":size})
     price = query.fetchone()[0]
     for extra in extras:
         xtr_sql = "SELECT price FROM extras WHERE name=:name"
         xtr_query = db.session.execute(xtr_sql,{"name":extra})
-        price += xtr_query.fetchone()[0]
+        if xtr_query.fetchone():
+            price += xtr_query.fetchone()[0]
     return price
     
 def view_all():
