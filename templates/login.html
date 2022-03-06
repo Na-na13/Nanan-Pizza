@@ -1,15 +1,15 @@
 {% extends "layout.html" %}
 {% block title %}Kirjaudu{% endblock %}
 {% block content %}
-	<h3>Kirjaudu sisään</h3>
-	<form action="/login" method="POST">
-		<label for="username">Käyttäjätunnus: </label>
-		<input type="text" placeholder="Syötä käyttäjätunnus" id="username" name="username" maxlength="10" required><br>
-		<label for="password">Salasana: </label>
-		<input type="password" placeholder="Syötä salasana" id="password" name="password" maxlength="15" required><br>
-		<button type="submit" value="submit">Kirjaudu</button>
-	</form>
-	<p>Eikö sinulla ole käyttäjätunnusta? <a href="/create">Luo uusi käyttäjätunnus!</a>
-	</p>
+	<div class="login-box">
+		<h3>Kirjaudu sisään</h3>
+		<form action="/login" method="POST">
+			<label for="username">Käyttäjätunnus: </label>
+			<input type="text" placeholder="Syötä käyttäjätunnus" id="username" name="username" maxlength="10" required><br>
+			<label for="password">Salasana: </label>
+			<input type="password" placeholder="Syötä salasana" id="password" name="password" maxlength="15" required><br>
+			<button type="submit" value="submit">Kirjaudu</button>
+		</form>
+	</div>
 {% endblock %}
 

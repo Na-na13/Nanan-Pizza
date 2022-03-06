@@ -21,14 +21,14 @@ def logout():
     del session["user_id"]
     del session["user_name"]
     
-def create_new(username, password):
-    # check if username is available
+def create_new(username, password, password2):
+    if password != password2:
+        return False
     try:
         hash_value = generate_password_hash(password)
         sql = "INSERT INTO users (username, password) VALUES (:username, :password)"        
         db.session.execute(sql,{"username":username, "password":hash_value})
         db.session.commit()
-        print("new user created")
         return login(username, password)
     except Exception as e:
         print(e)

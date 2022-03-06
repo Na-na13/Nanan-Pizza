@@ -38,7 +38,8 @@ def create_new_user():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if user.create_new(username, password):
+        password2 = request.form["password2"]
+        if user.create_new(username, password, password2):
             return redirect("/")
         else:
             pass

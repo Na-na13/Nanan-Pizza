@@ -18,7 +18,7 @@
 			<div class="right_menu">
 				{% if session.user_id %}
 				<div class="dropdown">
-					<a href="">{{session.user_name}}</a>
+					<span class="user-name">{{session.user_name}}<span>
 					<div class="dropdown-menu">
 						<a href="/logout">Kirjaudu ulos</a>
 					</div>

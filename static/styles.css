@@ -1,4 +1,3 @@
-
 .container {
 	display: grid;
 	grid-template-areas:
@@ -28,16 +27,16 @@
 
 .left_menu {
 	padding-left: 50px;
-	
 }
-.left_menu > a {
-	font: small-caps bold 24px/1 sans-serif;
-	font-size: 20px;
+
+.left_menu > a,
+.right_menu > a,
+.user-name {
+	font: small-caps bold 20px/1 sans-serif;
 	color: black;
 	text-decoration: None;
 	padding-left: 10px;
 	padding-right: 10px;
-
 }
 
 .right_menu {
@@ -45,17 +44,10 @@
 	padding-right: 50px;
 }
 
-.right_menu > a {
-	font: small-caps bold 24px/1 sans-serif;
-	font-size: 20px;
-	color: black;
-	text-decoration: None;
-	padding-left: 10px;
-	padding-right: 10px;
-	
-}
-
-.right_menu a.button {
+a.button,
+nav button,
+.login-box > form > button,
+.new-user-box > form > button {
 	background-color: rgb(100,100,100);
 	border: none;
 	color: white;
@@ -65,17 +57,24 @@
 	text-decoration: none;
 	margin: 4px 2px;
 	cursor: pointer;
-	
 }
 
-.left_menu > a:hover {
-	text-decoration: underline;
-	
-}
+a.button:hover,
+nav button:hover,
+.pizza-option button:hover,
+.close-menu:hover,
+.login-box > form > button:hover,
+.new-user-box > form > button:hover {
+	background-color: rgb(150,150,150)
+}	
 
-.right_menu > a:hover {
+.left_menu > a:hover,
+.right-menu > a:hover,
+.user-name:hover,
+.dropdown-menu > a:hover,
+.dropdown:hover,
+nav a:hover {
 	text-decoration: underline;
-	
 }
 
 .imagebox {
@@ -96,20 +95,13 @@ img {
 .dropdown {
 	position: relative;
 	display: inline-block;
-	font: small-caps bold 24px/1 sans-serif;
-	font-size: 20px;
+	font: small-caps bold 20px/1 sans-serif;
 	color: black;
 }
 
 .dropdown > a {
 	text-decoration: None;
 	color: black;
-
-}
-.dropdown > a:hover {
-	text-decoration: underline;
-	color: black;
-
 }
 
 .dropdown-menu {
@@ -118,13 +110,7 @@ img {
 	background-color: white;
 	min-width: 120px;
 	padding: 10px;
-	z-index: 1;
 	text-align:center;
-	
-}
-
-.dropdown:hover {
-	text-decoration: underline;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -135,12 +121,6 @@ img {
 	font: small-caps 20px/1 sans-serif;
 	color: black;
 	text-decoration: None;
-
-}
-
-.dropdown-menu > a:hover {
-	text-decoration: underline;
-
 }
 
 header {
@@ -152,14 +132,12 @@ header {
 
 nav {
 	grid-area: nav;
-	font: small-caps bold 24px/1 sans-serif;
-	font-size: 20px;
+	font: small-caps bold 20px/1 sans-serif;
 	padding:10px;
 	box-shadow: 0px 7px 3px rgba(220, 220, 220, .2);
 	position:sticky;
 	top: 180px;
 	background-color: white;
-	
 }
 
 nav a {
@@ -168,28 +146,6 @@ nav a {
 	text-decoration: None;
 	padding-right:10px;
 	padding-left: 10px;
-
-}
-
-nav a:hover {
-	text-decoration: underline;
-
-}
-
-nav button {
-	  background-color: rgb(100,100,100);
-	  border: none;
-	  color: white;
-	  padding: 5px 25px;
-	  font: small-caps 20px/1 sans-serif;
-	  text-align: center;
-	  text-decoration: none;
-	  margin: 4px 2px;
-	  cursor: pointer;
-}
-
-nav button:hover {
-	background-color: rgb(150,150,150)
 }
 
 nav input[type=search] {
@@ -202,10 +158,10 @@ main {
 	grid-area: content;
 }
 
-
 .category-header {
 	font-family: Helvetica, sans-serif;
 	font-size: 17px;
+	text-align: center;
 	background-color: rgb(230,230,230);
 	padding: 5px 20px;
 }
@@ -244,13 +200,10 @@ main {
 	text-decoration: none;
 	margin: 4px 2px;
 	cursor: pointer;
-
-}
-.container-option {
-	padding: 16px;
 }
 
 .order-menu {
+	font-family: Helvetica, sans-serif;
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -264,17 +217,95 @@ main {
 	padding-top: 60px;
 }
 
-
 .menu-content {
 	background-color: rgb(255, 255, 255);
 	margin: 5% auto 15% auto;
-	width: 40%;
+	width: 30%;
+	position:relative;
+}
+
+.pizza-option {
+	padding: 16px;
+	box-shadow: 0px 7px 3px rgba(210, 210, 210, .2);
+	position:relative;
+}
+
+.pizza-option button,
+.close-menu {
+	  background-color: rgb(100,100,100);
+	  border: none;
+	  color: white;
+	  padding: 5px 25px;
+	  font: small-caps 20px/1 sans-serif;
+	  text-align: center;
+	  text-decoration: none;
+	  cursor: pointer;
+	  position:absolute;
+}
+
+.close-menu {
+	font-size: 15px;
+	top: 5px;
+	right: 5px;
+}
+
+.pizza-option button{
+	bottom: 5px;
 }
 
 h3 {
 	font: small-caps bold 24px/1 sans-serif;
 	font-size: 20px;
+}
 
+.login-box,
+.new-user-box {
+	font-family: Helvetica, sans-serif;
+	font-size: 17px;
+	margin: 5% auto 15% auto;
+	width: 30%;
+	position:relative;
+}
+
+.login-box > form {
+	display: grid;
+	max-width: 18em;
+    grid-template-columns: 8em 10em;
+}
+
+.login-box > form > label,
+.new-user-box > form > label{
+	grid-column-start: 1;
+}
+
+.login-box > form > input,
+.new-user-box > form > input{
+	grid-column-start: 2;
+}
+
+.login-box > form > button {
+	grid-row: 5;
+	grid-column-start: 2;
+}
+
+.login-box > p{
+	grid-column: 1 / span 2;
+}		
+
+.login-box > form label, input,
+.new-user-box > form label, input {
+    margin: auto 0;
+}
+
+.new-user-box > form {
+	display: grid;
+	max-width: 20em;
+    grid-template-columns: 10em 10em;
+}
+
+.new-user-box > form > button {
+	grid-row: 7;
+	grid-column-start: 2;
 }
 
 .animate {
