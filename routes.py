@@ -40,7 +40,7 @@ def create_new_user():
         password = request.form["password"]
         password2 = request.form["password2"]
         if user.create_new(username, password, password2):
-            return redirect("/")
+            return redirect("/logged")
         else:
             pass
             # käyttäjätunnus on varattu!
