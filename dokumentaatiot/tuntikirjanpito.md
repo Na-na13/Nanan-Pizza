@@ -16,5 +16,7 @@ pvm    | aika | tehtävät
 20.2.|2 h|Koodin siistimistä ja Herokuun pushaaminen sekä toiminnan testausta
 24.2.|3 h|Virheiden korjaamista ja toiminto tuotteen poistamiselle tilauslistalta lisätty
 3.3.|5 h|Tietokantataulujen sekä niihin kohdentuvien hakujen selkiyttämistä ja yhtenäistämistä
-5.3.|7 h|Ulkoasun luominen
-**yht.**|**62 h**
+4.3.|7 h|Tietokannan parantamista ja taulujen yhtenäistämistä, ulkoasun suunnittelua
+5.3.|7 h|Ulkoasun tekoa, hakutoiminnallisuuden lisäys
+6.3.|8 h|Viimeistelyä ja varmistelua, projekti valmis
+**yht.**|**77 h**
