@@ -1,13 +1,13 @@
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR (10) UNIQUE NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
     role INTEGER NOT NULL DEFAULT 2
 );
 
 CREATE TABLE products (
     prod_id SERIAL PRIMARY KEY,
-    category TEXT NOT NULL
+    category TEXT NOT NULL,
     name TEXT UNIQUE NOT NULL, 
     ingredients TEXT [], 
     price NUMERIC (4,2) NOT NULL
@@ -21,7 +21,7 @@ CREATE TABLE extras (
 
 CREATE TABLE sizes (
     size_id SERIAL PRIMARY KEY,
-    size_name TEXT NOT NULL
+    size_name TEXT NOT NULL,
     price NUMERIC (4,2) NOT NULL
 );
 
