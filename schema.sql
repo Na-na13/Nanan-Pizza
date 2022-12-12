@@ -42,3 +42,5 @@ CREATE TABLE orders (
     order_time TIMESTAMP NOT NULL
 );
 
+INSERT INTO products (category, name, price, ingredients) VALUES ('pizza', 'Mozzarella', 11.00, '{"tomaatti","mozzarella","pesto","tuore basilika"}');
+
